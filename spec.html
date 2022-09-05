@@ -1932,7 +1932,7 @@
             1. If _d_ is *+0*<sub>𝔽</sub> or _d_ is *-0*<sub>𝔽</sub>, return *NaN*.
             1. If _n_ is *+0*<sub>𝔽</sub> or _n_ is *-0*<sub>𝔽</sub>, return _n_.
             1. Assert: _n_ and _d_ are finite and non-zero.
-            1. Let _r_ be ℝ(_n_) - (ℝ(_d_) &times; _q_) where _q_ is an integer that is negative if and only if _n_ and _d_ have opposite sign, and whose magnitude is as large as possible without exceeding the magnitude of ℝ(_n_) / ℝ(_d_).
+            1. [declared="q"] Let _r_ be ℝ(_n_) - (ℝ(_d_) &times; _q_) where _q_ is an integer that is negative if and only if _n_ and _d_ have opposite sign, and whose magnitude is as large as possible without exceeding the magnitude of ℝ(_n_) / ℝ(_d_).
             1. If _r_ is 0 and _n_ &lt; *-0*<sub>𝔽</sub>, return *-0*<sub>𝔽</sub>.
             1. Return 𝔽(_r_).
           </emu-alg>
@@ -2356,7 +2356,7 @@
           <emu-alg>
             1. If _d_ is *0*<sub>ℤ</sub>, throw a *RangeError* exception.
             1. If _n_ is *0*<sub>ℤ</sub>, return *0*<sub>ℤ</sub>.
-            1. Let _r_ be the BigInt defined by the mathematical relation _r_ = _n_ - (_d_ &times; _q_) where _q_ is a BigInt that is negative only if _n_/_d_ is negative and positive only if _n_/_d_ is positive, and whose magnitude is as large as possible without exceeding the magnitude of the true mathematical quotient of _n_ and _d_.
+            1. [declared="q"] Let _r_ be the BigInt defined by the mathematical relation _r_ = _n_ - (_d_ &times; _q_) where _q_ is a BigInt that is negative only if _n_/_d_ is negative and positive only if _n_/_d_ is positive, and whose magnitude is as large as possible without exceeding the magnitude of the true mathematical quotient of _n_ and _d_.
             1. Return _r_.
           </emu-alg>
           <emu-note>The sign of the result equals the sign of the dividend.</emu-note>
@@ -11714,7 +11714,7 @@
       </dl>
       <emu-alg>
         1. Set _realmRec_.[[Intrinsics]] to a new Record.
-        1. Set fields of _realmRec_.[[Intrinsics]] with the values listed in <emu-xref href="#table-well-known-intrinsic-objects"></emu-xref>. The field names are the names listed in column one of the table. The value of each field is a new object value fully and recursively populated with property values as defined by the specification of each object in clauses <emu-xref href="#sec-global-object"></emu-xref> through <emu-xref href="#sec-reflection"></emu-xref>. All object property values are newly created object values. All values that are built-in function objects are created by performing CreateBuiltinFunction(_steps_, _length_, _name_, _slots_, _realmRec_, _prototype_) where _steps_ is the definition of that function provided by this specification, _name_ is the initial value of the function's *"name"* property, _length_ is the initial value of the function's *"length"* property, _slots_ is a list of the names, if any, of the function's specified internal slots, and _prototype_ is the specified value of the function's [[Prototype]] internal slot. The creation of the intrinsics and their properties must be ordered to avoid any dependencies upon objects that have not yet been created.
+        1. [declared="steps,name,length,slots,prototype"] Set fields of _realmRec_.[[Intrinsics]] with the values listed in <emu-xref href="#table-well-known-intrinsic-objects"></emu-xref>. The field names are the names listed in column one of the table. The value of each field is a new object value fully and recursively populated with property values as defined by the specification of each object in clauses <emu-xref href="#sec-global-object"></emu-xref> through <emu-xref href="#sec-reflection"></emu-xref>. All object property values are newly created object values. All values that are built-in function objects are created by performing CreateBuiltinFunction(_steps_, _length_, _name_, _slots_, _realmRec_, _prototype_) where _steps_ is the definition of that function provided by this specification, _name_ is the initial value of the function's *"name"* property, _length_ is the initial value of the function's *"length"* property, _slots_ is a list of the names, if any, of the function's specified internal slots, and _prototype_ is the specified value of the function's [[Prototype]] internal slot. The creation of the intrinsics and their properties must be ordered to avoid any dependencies upon objects that have not yet been created.
         1. Perform AddRestrictedFunctionProperties(_realmRec_.[[Intrinsics]].[[%Function.prototype%]], _realmRec_).
         1. Return ~unused~.
       </emu-alg>
@@ -15041,7 +15041,7 @@
           1. Let _M_ be MakeBasicObject(_internalSlotsList_).
           1. Set _M_'s essential internal methods to the definitions specified in <emu-xref href="#sec-module-namespace-exotic-objects"></emu-xref>.
           1. Set _M_.[[Module]] to _module_.
-          1. Let _sortedExports_ be a List whose elements are the elements of _exports_ ordered as if an Array of the same values had been sorted using %Array.prototype.sort% using *undefined* as _comparefn_.
+          1. [declared="comparefn"] Let _sortedExports_ be a List whose elements are the elements of _exports_ ordered as if an Array of the same values had been sorted using %Array.prototype.sort% using *undefined* as _comparefn_.
           1. Set _M_.[[Exports]] to _sortedExports_.
           1. Create own properties of _M_ corresponding to the definitions in <emu-xref href="#sec-module-namespace-objects"></emu-xref>.
           1. Set _module_.[[Namespace]] to _M_.
@@ -29911,7 +29911,7 @@
         <p>This function performs the following steps when called:</p>
         <emu-alg>
           1. Let _C_ be the active function object.
-          1. Let _args_ be the _argumentsList_ that was passed to this function by [[Call]] or [[Construct]].
+          1. [declared="argumentsList"] Let _args_ be the _argumentsList_ that was passed to this function by [[Call]] or [[Construct]].
           1. Return ? CreateDynamicFunction(_C_, NewTarget, ~normal~, _args_).
         </emu-alg>
         <emu-note>
@@ -33985,7 +33985,7 @@ THH:mm:ss.sss
             1. Let _result_ be the empty String.
             1. Let _templateRemainder_ be _replacementTemplate_.
             1. Repeat, while _templateRemainder_ is not the empty String,
-              1. NOTE: The following steps isolate _ref_ (a prefix of _templateRemainder_), determine _refReplacement_ (its replacement), and then append that replacement to _result_.
+              1. [declared="ref,refReplacement"] NOTE: The following steps isolate _ref_ (a prefix of _templateRemainder_), determine _refReplacement_ (its replacement), and then append that replacement to _result_.
               1. If _templateRemainder_ starts with *"$$"*, then
                 1. Let _ref_ be *"$$"*.
                 1. Let _refReplacement_ be *"$"*.
@@ -44716,7 +44716,7 @@ THH:mm:ss.sss
         <p>This function performs the following steps when called:</p>
         <emu-alg>
           1. Let _C_ be the active function object.
-          1. Let _args_ be the _argumentsList_ that was passed to this function by [[Call]] or [[Construct]].
+          1. [declared="argumentsList"] Let _args_ be the _argumentsList_ that was passed to this function by [[Call]] or [[Construct]].
           1. Return ? CreateDynamicFunction(_C_, NewTarget, ~generator~, _args_).
         </emu-alg>
         <emu-note>
@@ -44822,7 +44822,7 @@ THH:mm:ss.sss
         <p>This function performs the following steps when called:</p>
         <emu-alg>
           1. Let _C_ be the active function object.
-          1. Let _args_ be the _argumentsList_ that was passed to this function by [[Call]] or [[Construct]].
+          1. [declared="argumentsList"] Let _args_ be the _argumentsList_ that was passed to this function by [[Call]] or [[Construct]].
           1. Return ? CreateDynamicFunction(_C_, NewTarget, ~asyncGenerator~, _args_).
         </emu-alg>
         <emu-note>
@@ -45161,7 +45161,7 @@ THH:mm:ss.sss
           1. Assert: GetGeneratorKind() is ~sync~.
           1. Set _generator_.[[GeneratorState]] to ~suspendedYield~.
           1. Remove _genContext_ from the execution context stack and restore the execution context that is at the top of the execution context stack as the running execution context.
-          1. Set the code evaluation state of _genContext_ such that when evaluation is resumed with a Completion Record _resumptionValue_ the following steps will be performed:
+          1. [declared="resumptionValue"] Set the code evaluation state of _genContext_ such that when evaluation is resumed with a Completion Record _resumptionValue_ the following steps will be performed:
             1. Return _resumptionValue_.
             1. NOTE: This returns to the evaluation of the |YieldExpression| that originally called this abstract operation.
           1. Return _iterNextObj_.
@@ -45671,7 +45671,7 @@ THH:mm:ss.sss
 
         <emu-alg>
           1. Let _C_ be the active function object.
-          1. Let _args_ be the _argumentsList_ that was passed to this function by [[Call]] or [[Construct]].
+          1. [declared="argumentsList"] Let _args_ be the _argumentsList_ that was passed to this function by [[Call]] or [[Construct]].
           1. Return ? CreateDynamicFunction(_C_, NewTarget, ~async~, _args_).
         </emu-alg>
 
