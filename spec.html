@@ -32027,12 +32027,11 @@
 
       <emu-clause id="sec-day-number-and-time-within-day">
         <h1>Day Number and Time within Day</h1>
-        <p>A given time value _t_ belongs to day number</p>
+        <p>A given time value _t_ identifies a <dfn>day number</dfn> and a specific time within the day.</p>
         <emu-eqn id="eqn-Day" aoid="Day">Day(_t_) = 𝔽(floor(ℝ(_t_ / msPerDay)))</emu-eqn>
+        <emu-eqn id="eqn-TimeWithinDay" aoid="TimeWithinDay">TimeWithinDay(_t_) = 𝔽(ℝ(_t_) modulo ℝ(msPerDay))</emu-eqn>
         <p>where the number of milliseconds per day is</p>
         <emu-eqn id="eqn-msPerDay" aoid="msPerDay">msPerDay = *86400000*<sub>𝔽</sub></emu-eqn>
-        <p>The remainder is called the time within the day:</p>
-        <emu-eqn id="eqn-TimeWithinDay" aoid="TimeWithinDay">TimeWithinDay(_t_) = 𝔽(ℝ(_t_) modulo ℝ(msPerDay))</emu-eqn>
       </emu-clause>
 
       <emu-clause id="sec-year-number">
@@ -32045,7 +32044,7 @@
             = *365*<sub>𝔽</sub> if (ℝ(_y_) modulo 100) = 0 and (ℝ(_y_) modulo 400) &ne; 0
             = *366*<sub>𝔽</sub> if (ℝ(_y_) modulo 400) = 0
         </emu-eqn>
-        <p>All non-leap years have 365 days with the usual number of days per month and leap years have an extra day in February. The day number of the first day of year _y_ is given by:</p>
+        <p>The day number of the first day of year _y_ changes by 365 days for every year of difference between _y_ and 1970 plus one day for each of those that is a leap year, and is defined as:</p>
         <emu-eqn id="eqn-DaysFromYear" aoid="DayFromYear">DayFromYear(_y_) = 𝔽(365 &times; (ℝ(_y_) - 1970) + floor((ℝ(_y_) - 1969) / 4) - floor((ℝ(_y_) - 1901) / 100) + floor((ℝ(_y_) - 1601) / 400))</emu-eqn>
         <p>The time value of the start of a year is:</p>
         <emu-eqn id="eqn-TimeFromYear" aoid="TimeFromYear">TimeFromYear(_y_) = msPerDay &times; DayFromYear(_y_)</emu-eqn>
