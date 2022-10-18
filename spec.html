@@ -32070,17 +32070,10 @@
           <emu-alg>
             1. Let _day_ be DayWithinYear(_t_).
             1. Let _inLeapYear_ be InLeapYear(_t_ ).
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(1, _inLeapYear_), return *+0*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(2, _inLeapYear_), return *1*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(3, _inLeapYear_), return *2*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(4, _inLeapYear_), return *3*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(5, _inLeapYear_), return *4*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(6, _inLeapYear_), return *5*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(7, _inLeapYear_), return *6*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(8, _inLeapYear_), return *7*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(9, _inLeapYear_), return *8*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(10, _inLeapYear_), return *9*<sub>𝔽</sub>.
-            1. If _day_ &lt; DaysWithinYearBeforeMonth(11, _inLeapYear_), return *10*<sub>𝔽</sub>.
+            1. Let _month_ be *+0*<sub>𝔽</sub>.
+            1. Repeat, while _month_ &lt; *11*<sub>𝔽</sub>,
+              1. If _day_ &lt; DaysWithinYearBeforeMonth(_month_ + 1, _inLeapYear_), return _month_.
+              1. Set _month_ to _month_ + *1*<sub>𝔽</sub>.
             1. Return *11*<sub>𝔽</sub>.
           </emu-alg>
         </emu-clause>
